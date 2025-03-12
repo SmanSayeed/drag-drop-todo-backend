@@ -28,9 +28,6 @@ class AuthController extends Controller
                 'string',
                 'confirmed',
                 Password::min(8)
-                    ->mixedCase()
-                    ->numbers()
-                    ->symbols()
             ],
         ]);
 
@@ -99,10 +96,7 @@ class AuthController extends Controller
         $user = $request->user();
 
         // Use our ResponseHelper to ensure the response has the expected format
-        return response()->json([
-            'success' => true,
-            'data' => new UserResource($user)
-        ]);
+       return ResponseHelper::success(new UserResource($user));
     }
 
     /**
