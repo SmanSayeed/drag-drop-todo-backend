@@ -41,7 +41,7 @@ class Handler extends ExceptionHandler
                 }
 
                 if ($e instanceof AuthenticationException) {
-                    return ResponseHelper::unauthorized('Unauthorized');
+                    return ResponseHelper::unauthorized();
                 }
 
                 if ($e instanceof ModelNotFoundException) {

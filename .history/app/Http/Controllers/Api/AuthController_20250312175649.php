@@ -95,14 +95,7 @@ class AuthController extends Controller
      */
     public function user(Request $request): JsonResponse
     {
-        // Get the authenticated user
-        $user = $request->user();
-
-        // Use our ResponseHelper to ensure the response has the expected format
-        return response()->json([
-            'success' => true,
-            'data' => new UserResource($user)
-        ]);
+        return ResponseHelper::success(new UserResource($request->user()));
     }
 
     /**

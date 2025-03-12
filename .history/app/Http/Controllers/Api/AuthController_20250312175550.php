@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Api;
 
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
-use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -47,7 +46,7 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         $data = [
-            'user' => new UserResource($user),
+            'user' => $user,
             'access_token' => $token,
             'token_type' => 'Bearer',
         ];
@@ -82,7 +81,7 @@ class AuthController extends Controller
         $token = $user->createToken('auth_token')->plainTextToken;
 
         $data = [
-            'user' => new UserResource($user),
+            'user' => $user,
             'access_token' => $token,
             'token_type' => 'Bearer',
         ];
@@ -95,14 +94,7 @@ class AuthController extends Controller
      */
     public function user(Request $request): JsonResponse
     {
-        // Get the authenticated user
-        $user = $request->user();
-
-        // Use our ResponseHelper to ensure the response has the expected format
-        return response()->json([
-            'success' => true,
-            'data' => new UserResource($user)
-        ]);
+        return ResponseHelper::success($request->user());
     }
 
     /**

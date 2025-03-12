@@ -76,7 +76,7 @@ class ResponseHelper
         return self::error($message, $errors, 422);
     }
 
-     /**
+    /**
      * Return unauthorized response
      *
      * @param string $message
@@ -144,6 +144,4 @@ class ResponseHelper
     {
         return self::success(null, $message);
     }
-
-
 }
